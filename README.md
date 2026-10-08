@@ -12,14 +12,14 @@
 
 ## 🌟 Why ReportCraft?
 
-When developers, students, and engineers ask AI coding assistants (Antigravity, Claude Desktop, Cursor, Copilot) to *"make a practical report"*, the agent typically responds with markdown text that needs tedious manual copying, image pasting, formatting, and PDF exporting.
+When developers, students, and engineers ask AI coding assistants (Claude Desktop, Google Antigravity, Cursor, Codex, Copilot, Windsurf) to *"make a practical report"*, the agent typically responds with markdown text that still requires manual copying, screen capturing, margin fixing, and PDF exporting.
 
 **ReportCraft changes that completely:**
-It equips any MCP-compatible AI agent with native capabilities to:
-1. 📸 **Spin up and capture screenshots** of web apps, dashboards, and views using headless Edge/Chrome.
-2. 💻 **Scan & extract source code** files automatically without manual prompt copying.
+It equips any MCP-compatible AI agent with native tools to:
+1. 📸 **Spin up and capture screenshots** of web apps, dashboards, and views using headless Edge/Chromium.
+2. 💻 **Scan & extract source code** directly from your project tree without messy copy-pasting.
 3. 🖼️ **Self-contain all media**: Embeds screenshots and institutional logos as Base64 data URIs so documents render 100% offline.
-4. 🎓 **Institutional-Grade Formatting**: Out-of-the-box support for strict college formats (Times New Roman, borderless code listings, formal margins).
+4. 🎓 **Institutional-Grade Formatting**: Out-of-the-box support for strict college formats (Times New Roman, borderless Courier code blocks, formal A4 margins).
 5. 👥 **Multi-Student Batch Generation**: Compiles separate, personalized PDFs with individualized header metadata (Name, PRN/Enrollment, Batch) for student teams in a single command.
 
 ---
@@ -29,7 +29,7 @@ It equips any MCP-compatible AI agent with native capabilities to:
 ```
 ┌────────────────────────────────────────────────────────┐
 │                   AI Assistant / Agent                 │
-│         (Antigravity / Claude Desktop / Cursor)        │
+│    (Claude Desktop / Antigravity / Cursor / Windsurf)  │
 └───────────────────────────┬────────────────────────────┘
                             │ (JSON-RPC over Stdio)
                             ▼
@@ -56,6 +56,146 @@ It equips any MCP-compatible AI agent with native capabilities to:
 
 ---
 
+## 🔌 Connecting to IDEs, Agents & Environments
+
+ReportCraft communicates over standard **stdio**, making it compatible with any MCP client.
+
+### 1. Google Antigravity IDE & Gemini CLI
+Add to your global `~/.gemini/config/mcp_config.json`:
+```json
+{
+  "mcpServers": {
+    "report-craft": {
+      "command": "node",
+      "args": ["C:\\path\\to\\report-craft-mcp\\index.js"]
+    }
+  }
+}
+```
+
+### 2. Anthropic Claude Desktop
+Add to your `claude_desktop_config.json` (located at `%APPDATA%\Claude\` on Windows or `~/Library/Application Support/Claude/` on macOS):
+```json
+{
+  "mcpServers": {
+    "report-craft": {
+      "command": "node",
+      "args": ["/absolute/path/to/report-craft-mcp/index.js"]
+    }
+  }
+}
+```
+
+### 3. Cursor IDE / OpenAI Codex / Copilot Workspaces
+In your project's `.cursor/mcp.json` or under Cursor Settings &rarr; Features &rarr; MCP Servers:
+```json
+{
+  "mcpServers": {
+    "report-craft": {
+      "command": "node",
+      "args": ["/absolute/path/to/report-craft-mcp/index.js"]
+    }
+  }
+}
+```
+
+### 4. Windsurf IDE (Codeium Cascade)
+Add to `~/.codeium/windsurf/mcp_config.json`:
+```json
+{
+  "mcpServers": {
+    "report-craft": {
+      "command": "node",
+      "args": ["/absolute/path/to/report-craft-mcp/index.js"]
+    }
+  }
+}
+```
+
+### 5. VS Code (Cline / Roo Code / Continue.dev)
+Add to your extension's MCP configuration settings:
+```json
+{
+  "mcpServers": {
+    "report-craft": {
+      "command": "node",
+      "args": ["/absolute/path/to/report-craft-mcp/index.js"]
+    }
+  }
+}
+```
+
+---
+
+## ⚡ How to Use It With Your AI Agent
+
+Once connected, your AI assistant will automatically recognize the `report-craft` toolset. 
+
+### Minimal Prompting (Agent Interaction)
+You don't need to specify complex styling parameters. Simply ask the agent:
+
+> *"Generate an academic submission report for my React Course Management project with screenshots of the dashboard and student list."*
+
+The Agent will follow a minimal interaction protocol:
+1. **Formatting Style**: `academic_formal` (Default / University standard), `modern_clean`, or `ieee_style`.
+2. **Aim / Objective**: The practical's task statement (if not already in the project).
+3. **Student Metadata**: Name, Enrollment/Roll No, and Subject.
+
+The agent handles everything else autonomously:
+- Finds and extracts code files (`src/App.jsx`, `src/components/...`).
+- Boots local dev server and captures screenshots.
+- Encodes your university logo and figures into Base64.
+- Compiles the final `.html` and `.pdf` documents directly in your folder!
+
+---
+
+## 🏫 Customizing College / University & Educational Branding
+
+ReportCraft is engineered specifically to satisfy strict institutional grading guidelines.
+
+### 1. Adding Your University / Institute Logo
+Drop your university or college logo (PNG, JPG, or SVG) anywhere in your project root or `assets/` folder with one of these standard names:
+- `gsfc_logo.png` *(GSFC University)*
+- `logo.png`
+- `msu_logo.png` *(MSU Baroda)*
+- `university_logo.png`
+
+ReportCraft **auto-detects** it, encodes it into a Base64 data URI, and renders it in the footer of every page with crisp print resolution. You can also explicitly specify `logoPath: "./path/to/custom_logo.png"`.
+
+### 2. Custom Header Metadata
+Customize the centered header block across all pages:
+```json
+{
+  "name": "Hitarth Thombre",
+  "enrollment": "25BT04D255",
+  "batch": "5A - B",
+  "department": "Computer Science & Engineering",
+  "semester": "5th Semester"
+}
+```
+
+### 3. Subject & Footer Branding
+Pass your subject name to print on the bottom-left rule:
+```json
+{
+  "subject": "Advanced Web Technology (AWT)"
+}
+```
+
+### 4. 👥 Multi-Student Batch Generation (Team Submissions)
+When submitting group projects or lab practicals for multiple batchmates, pass a list of students:
+```json
+{
+  "students": [
+    { "name": "Hitarth Thombre", "enrollment": "25BT04D255", "batch": "5A - B", "outputPdfFileName": "Practical_Report_Hitarth.pdf" },
+    { "name": "Trupti More", "enrollment": "25BT04D256", "batch": "5A - B", "outputPdfFileName": "Practical_Report_Trupti.pdf" }
+  ]
+}
+```
+ReportCraft compiles separate, personalized PDFs with individual student headers and creates the master copy in one pass.
+
+---
+
 ## 🎨 Supported Style Presets
 
 | Preset | Typography | Best For | Visual Tone |
@@ -66,118 +206,15 @@ It equips any MCP-compatible AI agent with native capabilities to:
 
 ---
 
-## 🚀 Quick Setup & Installation
-
-### Option 1: Claude Desktop
-
-Add this to your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "report-craft": {
-      "command": "node",
-      "args": ["/path/to/report-craft-mcp/index.js"]
-    }
-  }
-}
-```
-
-### Option 2: Google Antigravity IDE
-
-Add to your global `~/.gemini/config/mcp_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "report-craft": {
-      "command": "node",
-      "args": ["C:\\Users\\ASUS\\.gemini\\mcp-servers\\report-craft-mcp\\index.js"]
-    }
-  }
-}
-```
-
-### Option 3: Cursor / VS Code / Windsurf
-
-Configure the MCP server under your assistant's settings:
-```bash
-node /path/to/report-craft-mcp/index.js
-```
-
----
-
 ## 🛠️ MCP Tools Reference
 
-### 1. `capture_screenshots`
-Captures high-resolution webpage or application screenshots using headless Edge/Chrome.
-
-```json
-{
-  "targets": [
-    {
-      "url": "http://localhost:5173/dashboard",
-      "outputFileName": "dashboard.png",
-      "fullPage": true,
-      "delayMs": 500
-    }
-  ],
-  "outputDir": "./screenshots"
-}
-```
-
-### 2. `collect_source_files`
-Extracts code files directly from the project directory, skipping `node_modules` and build directories.
-
-```json
-{
-  "baseDir": "./my-project",
-  "relativePaths": ["src/App.jsx", "src/Header.jsx", "src/App.css"]
-}
-```
-
-### 3. `generate_report_html`
-Generates an HTML report document with embedded Base64 images and the requested styling preset.
-
-```json
-{
-  "title": "PRACTICAL ASSIGNMENT 6 REPORT",
-  "subtitle": "COLLEGE COURSE & STUDENT MANAGEMENT SYSTEM USING REACT",
-  "stylePreset": "academic_formal",
-  "sections": [
-    {
-      "heading": "1. OBJECTIVE / AIM",
-      "paragraphs": ["Develop a responsive student management portal."]
-    }
-  ],
-  "codeListings": [
-    { "filename": "src/App.jsx", "code": "// source code..." }
-  ],
-  "figures": [
-    { "imagePath": "./dashboard.png", "caption": "Figure 1: Dashboard View" }
-  ],
-  "outputPath": "./Practical_Report.html"
-}
-```
-
-### 4. `compile_report_pdf`
-Compiles an HTML report file into academic A4 PDF(s) with institutional header/footer templates and multi-student batching.
-
-```json
-{
-  "htmlPath": "./Practical_Report.html",
-  "outputPdfPath": "./Practical_Report.pdf",
-  "subject": "Advanced Web Technology",
-  "logoPath": "./assets/gsfc_logo.png",
-  "students": [
-    { "name": "Hitarth Thombre", "enrollment": "25BT04D255", "batch": "5A - B", "outputPdfFileName": "Report_Hitarth.pdf" },
-    { "name": "Trupti More", "enrollment": "25BT04D256", "batch": "5A - B", "outputPdfFileName": "Report_Trupti.pdf" }
-  ]
-}
-```
-
-### 5. `build_complete_assignment_report` (All-In-One Orchestrator)
-Takes the project directory, student info, source files, and screenshots, and executes the entire pipeline in a single step.
+| Tool Name | Parameters | Description |
+| :--- | :--- | :--- |
+| **`capture_screenshots`** | `targets`, `outputDir`, `viewport` | Launches headless Edge/Chromium, waits for network idle, supports optional delays and element selectors, and saves full-page PNG screenshots. |
+| **`collect_source_files`** | `baseDir`, `relativePaths`, `extensions`, `maxFiles` | Scans workspace, excludes `node_modules`, `dist`, `.git`, and extracts source listings with line counts. |
+| **`generate_report_html`** | `title`, `subtitle`, `stylePreset`, `sections`, `codeListings`, `figures`, `outputPath` | Builds self-contained HTML with embedded Base64 images and academic styling. |
+| **`compile_report_pdf`** | `htmlPath`, `outputPdfPath`, `subject`, `logoPath`, `students` | Converts HTML to print A4 PDF with institutional header/footer templates and multi-student batching. |
+| **`build_complete_assignment_report`** | Full pipeline args | End-to-end orchestrator that takes project directory, aim, procedure, source files, and screenshots to produce final reports in one step. |
 
 ---
 
@@ -215,5 +252,5 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
 
-**Developed with ❤️ by [Hitarth Thombre](https://github.com/hitarthombre)**
+**Developed with ❤️ by [Hitarth Thombre](https://github.com/hitarthombre)**  
 *(GSFC University - School of Technology)*
