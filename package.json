@@ -1,0 +1,42 @@
+{
+  "name": "report-craft-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for automated academic assignment & task reports with headless screenshots, code extraction, and professional PDF generation.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "report-craft-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "report-generator",
+    "academic-reports",
+    "assignment-builder",
+    "pdf-generation",
+    "puppeteer",
+    "headless-browser",
+    "ai-agent",
+    "antigravity",
+    "claude-desktop"
+  ],
+  "author": "Hitarth Thombre",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hitarthombre/report-craft-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hitarthombre/report-craft-mcp/issues"
+  },
+  "homepage": "https://github.com/hitarthombre/report-craft-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "puppeteer-core": "^25.13.0",
+    "zod": "^4.6.5"
+  }
+}
