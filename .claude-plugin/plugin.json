@@ -1,0 +1,11 @@
+{
+  "name": "report-craft-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for automated academic assignment & task reports with headless screenshots, code extraction, and professional PDF generation.",
+  "author": {
+    "name": "Hitarth Thombre",
+    "url": "https://github.com/hitarthombre"
+  },
+  "repository": "https://github.com/hitarthombre/report-craft-mcp",
+  "license": "MIT"
+}

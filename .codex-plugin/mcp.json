@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "report-craft": {
+      "command": "node",
+      "args": [
+        "./index.js"
+      ]
+    }
+  }
+}

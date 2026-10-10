@@ -1,0 +1,35 @@
+{
+  "name": "report-craft-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for automated academic assignment & task reports with headless screenshots, code extraction, and professional PDF generation.",
+  "author": {
+    "name": "Hitarth Thombre",
+    "url": "https://github.com/hitarthombre"
+  },
+  "homepage": "https://github.com/hitarthombre/report-craft-mcp#readme",
+  "repository": "https://github.com/hitarthombre/report-craft-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "report-generator",
+    "academic-reports",
+    "assignment-builder",
+    "pdf-generation",
+    "puppeteer"
+  ],
+  "interface": {
+    "displayName": "ReportCraft MCP",
+    "shortDescription": "Autonomous academic & project report generator",
+    "longDescription": "Automates report generation for academic assignments and project tasks through headless Chromium screenshots, source code collection, self-contained HTML generation with base64 assets, and personalized PDF exports.",
+    "developerName": "Hitarth Thombre",
+    "category": "Development & Workflow",
+    "capabilities": [
+      "MCP",
+      "Execute",
+      "Read"
+    ],
+    "websiteURL": "https://github.com/hitarthombre/report-craft-mcp"
+  },
+  "mcpServers": "./.codex-plugin/mcp.json"
+}
